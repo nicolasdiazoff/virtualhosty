@@ -1,0 +1,32 @@
+{
+  "name": "seeder-s",
+  "version": "1.1.0",
+  "description": "Es un organizador de proyectos personal construido en node.js y bash",
+  "main": "index.js",
+  "bin": {
+    "seeder": "index.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {
+    "prompt": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolasdiazoff/seeder.git"
+  },
+  "author": "nicolasdiazoff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicolasdiazoff/seeder/issues"
+  },
+  "homepage": "https://github.com/nicolasdiazoff/seeder#readme"
+}
