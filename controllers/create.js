@@ -1,69 +1,34 @@
-var fs = require('fs'),
-	inquirer = require("inquirer");
-	
-	inquirer.registerPrompt('chalk-pipe', require('inquirer-chalk-pipe'));
+const fs = require('fs');
+const config = require('../config.json');
 
-function randomString(){
-	var text = "";
-	var posissible = "ABCDFGHIJKLMNOPQRSTUVWXYZabcdfghijklmnopqrstuvwxyz";
+function createProject() {
 
-	for (var i = 0; i < 32; i++) 
-		text += posissible.charAt(Math.floor(Math.random() * posissible.length));
-	
-	return text;
-}
+	// formato para crear un proyecto // -c name[optional] url folder
+	// if the project not have a name , the program use the url same name
 
-function createProject(){
+	// task and conditions
+	//- condicion para saber si existe el nombre con la cantidad de parametros
+	// crear direcciones si no existen
+	var ans = process.argv;
 
-	var phaty = "C:/ark/" + randomString();
+	console.log(ans.length);
 
-	const promptList = [
-		{
-			type: "list",
-				name: "tipo",
-				message: "Tipo:",
-				choices: [
-					"Laravel",
-					"Lumen",
-					"Ror",
-					"Express"
-				]
-		},
-		{
-			type: 'chalk-pipe',
-			name: 'name',
-			message: 'Titulo:',
-			default: '#cccccc'
-		}, 
-		{
-			type: 'chalk-pipe',
-			name: 'version',
-			message: 'Version:',
-			default: '0.0.1'
-		}, 
-		{
-			type: 'chalk-pipe',
-			name: 'description',
-			message: 'Descripcion:',
-			default: '#cccccc'
-		}, 
-		{
-			type: 'chalk-pipe',
-			name: 'author',
-			message: 'Author:',
-			default: '#cccccc'
-		}
-	];
+	if (ans.length <= 3){
+		console.log("You need more to create a virtual server for example:");		
+		console.log("The name is " , ans[3]);
+		console.log("The local url is " , ans[4]);
+		console.log("The folder is " , ans[5]);
+	}
+	else if (ans.length <= 4){
+		console.log("You need more to create a virtual server for example:");		
+		console.log("The local url is " , ans[4]);
+		console.log("The folder is " , ans[5]);
+	}	
+	else if (ans.length <= 5){
+		console.log("You need more to create a virtual server for example:");
+		console.log("The folder is " , ans[5]);
+	}
 
-	inquirer.prompt(promptList).then(function(ans){
-		console.log(ans);
-		fs.mkdir(phaty, function(){
-			fs.writeFile(phaty + "/package.json", JSON.stringify(ans) , function(){
-				console.log("Se creo el proyecto");
-			});
-		});
-	});
-	
 }
 
 module.exports.new = createProject;

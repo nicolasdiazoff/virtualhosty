@@ -1,19 +1,19 @@
 {
-  "name": "seeder-s",
+  "name": "hosty",
   "version": "1.1.0",
-  "description": "Es un organizador de proyectos personal construido en node.js y bash",
+  "description": "La funcion de hosty es crear servidores virtuales para xampp",
   "main": "index.js",
   "bin": {
-    "seeder": "index.js"
+    "hosty": "index.js"
   },
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "prompt": "^1.0.0"
+    "prompt": "*"
   },
   "devDependencies": {
-    "prompt": "^1.0.0"
+    "prompt": "*"
   },
   "scripts": {
     "start": "node index.js",
@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nicolasdiazoff/seeder.git"
+    "url": "git+https://github.com/nicolasdiazoff/hosty.git"
   },
   "author": "nicolasdiazoff",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nicolasdiazoff/seeder/issues"
+    "url": "https://github.com/nicolasdiazoff/hosty/issues"
   },
-  "homepage": "https://github.com/nicolasdiazoff/seeder#readme"
+  "homepage": "https://github.com/nicolasdiazoff/hosty#readme"
 }
