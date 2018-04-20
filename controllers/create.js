@@ -8,6 +8,12 @@ var project = {
 	"folder": ""
 }
 
+var ans = process.argv;
+
+var parameterName = ans[3];
+var parameterUrl = ans[4];
+var parameterFolder = ans[5];
+
 //validator of a url
 function correctUrl(url) {
 	var element;
@@ -31,14 +37,14 @@ function correctUrl(url) {
 	project.url = element;
 }
 
-//comprueba si la url esta en el registro
+//check if the url is in the registry
 function checkUrlPathExists() {
 	for (var i = 0; i < config.projects.length; i++){
 		if (config.projects[i].url == project.url) return i;
 	}
 }
 
-//comprueba si la url de la carpeta esta en el registro
+//check if the url of the folder is in the registry
 function checkFolderPathExists(path) {
 	for(var i = 0; i < config.projects.length; i++) {
 		if (config.projects[i].folder == config.settings.xampp_files_directory + path ) return i;
@@ -46,80 +52,76 @@ function checkFolderPathExists(path) {
 }
 
 // If the directory does not exist and is not registered, it is created
-function existenceFolder(path){
+function ifDoesNotExistCreateFolder(path){
 
 	fs.lstat(config.settings.xampp_files_directory + path, function(notexists, exists){
 		if(notexists){
 			fs.mkdir(config.settings.xampp_files_directory + path, function(err,data){
 				if (err) throw err;
-				console.log("El directorio fue creado con exito")
+				console.log("The directory was created automatically")
 			});
-		}
-		else {
-	    	console.log("There is a directory, do you want to update the project information?");
 		}
 	});
 
-	if(fs.existsSync(config.settings.xampp_files_directory + path)){
-		project.folder = config.settings.xampp_files_directory + path;
-	}
-
 }
 
-function checkout(argument) {
-	// body...
-	// formato para crear un proyecto // -c name[optional] url folder
-	var ans = process.argv;
+function checkout() {
+	
 	if (ans.length <= 3){
-		console.log("You need more to create a virtual server for example:");		
-		console.log("The name is " , ans[3]);
-		console.log("The local url is " , ans[4]);
-		console.log("The folder is " , ans[5]);
+		var valor = parameterName;
+		if(valor == null || valor.length == 0 || /^\s+$/.test(valor)){
+			console.log("You need a -name- to create this virtual server");		
+		}
 	}
 	else if (ans.length <= 4){
-		console.log("You need more to create a virtual server for example:");		
-		console.log("The local url is " , ans[4]);
-		console.log("The folder is " , ans[5]);
-	}	
+		var valor = parameterUrl
+		if(valor == null || valor.length == 0 || /^\s+$/.test(valor)){
+			console.log("You need a -url- to create this virtual server");		
+		}
+	}
 	else if (ans.length <= 5){
-		console.log("You need more to create a virtual server for example:");
-		console.log("The folder is " , ans[5]);
-	}
-
-	project.title = ans[3];
-	project.folder = config.settings.xampp_files_directory + ans[5];
-
-	correctUrl(ans[4]);
-	var checkedUrl = checkUrlPathExists();
-	var checkedFolder = checkFolderPathExists(ans[5]);
-
-	if (checkedUrl > -1) {
-		console.log("There is a project with the same url");		
-	}
-	else{
-		console.log("La url esta disponible");
-		if(checkedFolder > -1) {
-			console.log("There is a project with the same path folder");					
+		var valor = parameterFolder
+		if(valor == null || valor.length == 0 || /^\s+$/.test(valor)){
+			console.log("You need a -folder- to create this virtual server");		
 		}
-		else{
-			console.log("La url del directorio esta disponible");
-			existenceFolder(ans[5]);
-		}
+	}else{
+		createProject();
 	}
+
 }
 
 function createProject() {
 
-	checkout(function() {
-		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
-			if (err) throw err;
-			var mocha = JSON.parse(data);
-			mocha.projects.push(project);
-			fs.writeFileSync(config.settings.conf_file, JSON.stringify(mocha), 'utf-8');
-			update.all();
-		});
-	});
+	project.title = parameterName;
+	project.folder = config.settings.xampp_files_directory + parameterFolder;
+	
+	correctUrl(parameterUrl);
 
+	var checkedUrl = checkUrlPathExists();
+	var checkedFolder = checkFolderPathExists(parameterFolder);
+
+	if (checkedUrl > -1) {
+		console.log("There is a project with the same url");		
+	}
+	else if(checkedFolder > -1){
+		console.log("There is a project with the same path folder");					
+	}
+	else{
+		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
+			if (err == "EPERM"){
+				console.log("You need permision admins to")
+			} 
+			else{
+				ifDoesNotExistCreateFolder(parameterFolder);
+				var mocha = JSON.parse(data);
+				mocha.projects.push(project);
+				update.all(function(){
+					fs.writeFileSync(config.settings.conf_file, JSON.stringify(mocha), 'utf-8');
+					console.log("The project was registered correctly");
+				});
+			}
+		});
+	}
 }
 
-module.exports.new = createProject;
+module.exports.new = checkout;

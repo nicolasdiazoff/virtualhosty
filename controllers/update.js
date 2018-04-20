@@ -40,23 +40,30 @@ function updateApacheVhost(){
 	});
 }
 
-function updateDriversHost(){
+function updateDriversHost(callback){
 
 	fs.readFile("./archive/hosts", 'utf-8', function(err, data){
 		if (err) throw err;
 		fs.writeFile(config.settings.hosts_directory, data + "\n", 'utf-8', function(err, data){
 			if (err) {
-				console.log("Please run Git BASH with Admin rights.", err)
-			}
-			updateApacheVhost()
-			for (var i = 0; i < config.projects.length; i++) {		
-				fs.appendFile(config.settings.hosts_directory, "127.0.0.1       " + config.projects[i].url + "\n" , 'utf8', function (err, data) {
-					if (err) throw err;
-				});		
+				if (err.code == 'EPERM') {
+					console.log("ERROR!: Please run Git BASH with Admin rights.", "Error for driver host");
+				} else {
+					return console.log(err);
+				}
+			} else{			
+				for (var i = 0; i < config.projects.length; i++) {		
+					fs.appendFile(config.settings.hosts_directory, "127.0.0.1       " + config.projects[i].url + "\n" , 'utf8', function (err, data) {
+						if (err) throw err;
+					});		
+				}
+				console.log("Drivers Host were updated")
+				updateApacheVhost()
+				callback();
 			}
 		});
-		console.log("Drivers Host were updated")
 	});
+
 }
 
 module.exports.all = updateDriversHost;

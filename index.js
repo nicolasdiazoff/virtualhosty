@@ -2,15 +2,16 @@
 
 const create = require('./controllers/create.js');
 const update = require('./controllers/update.js');
-
-// process.argv.forEach(function (val, index, array) {
-//   console.log(index + ': ' + val);
-// });
+const read = require('./controllers/read.js');
+const destroy = require('./controllers/destroy.js');
 
 var ans = process.argv;
 
 switch(ans[2]){
 	case "create":
+		create.new();
+		break;
+	case "new":
 		create.new();
 		break;
 	case "-c":
@@ -22,17 +23,17 @@ switch(ans[2]){
 	case "-u":
 		update.all();
 		break;
-	case "new":
-		console.log("Crear", ans[0]);
+	case "-list":
+		read.all();
 		break;
 	case "edit":
 		console.log("Editar", ans[1]);
 		break;
-	case "read":
-		console.log("Leer", ans[1]);
+	case "-d":
+		destroy.vhost();
 		break;
 	case "delete":
-		console.log("Eliminar", ans[1]);
+		destroy.vhost();
 		break;
 	default:
 		console.log("No hay parametros");
