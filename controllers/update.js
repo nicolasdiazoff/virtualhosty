@@ -63,7 +63,6 @@ function updateDriversHost(callback){
 			}
 		});
 	});
-
 }
 
 module.exports.all = updateDriversHost;
