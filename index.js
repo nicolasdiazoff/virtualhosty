@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const create = require('./controllers/create.js');
+const update = require('./controllers/update.js');
 
 // process.argv.forEach(function (val, index, array) {
 //   console.log(index + ': ' + val);
@@ -16,10 +17,10 @@ switch(ans[2]){
 		create.new();
 		break;
 	case "-update":
-		create.new();
+		update.all();
 		break;
 	case "-u":
-		create.new();
+		update.all();
 		break;
 	case "new":
 		console.log("Crear", ans[0]);

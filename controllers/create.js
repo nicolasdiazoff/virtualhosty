@@ -1,5 +1,6 @@
 const fs = require('fs');
 const config = require('../config.json');
+const update = require('./update.js');
 
 var project = {
 	"title" : "",
@@ -109,19 +110,14 @@ function checkout(argument) {
 
 function createProject() {
 
-	checkout();
-
-	fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
-		if (err) throw err;
-		var mocha = JSON.parse(data);
-
-		mocha.projects.push(project);
-
-		console.log(mocha.projects);
-		console.log("Title:", project.title);
-
-		fs.writeFileSync(config.settings.conf_file, JSON.stringify(mocha), 'utf-8');
-
+	checkout(function() {
+		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
+			if (err) throw err;
+			var mocha = JSON.parse(data);
+			mocha.projects.push(project);
+			fs.writeFileSync(config.settings.conf_file, JSON.stringify(mocha), 'utf-8');
+			update.all();
+		});
 	});
 
 }

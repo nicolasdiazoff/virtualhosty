@@ -41,5 +41,12 @@
     ##CustomLog "logs/dummy-host2.example.com-access.log" common
 ##</VirtualHost>
 
-
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/"
+    ServerName localhost
+    <Directory "C:/xampp/htdocs/">
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
 

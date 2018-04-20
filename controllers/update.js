@@ -23,7 +23,7 @@ function updateApacheVhost(){
 				fs.appendFile(config.settings.xampp_vhost_directory, 
 					"<VirtualHost *:80>" + '\r\n' + '\t' +
 					'DocumentRoot "' + config.projects[i].folder + '"' + '\r\n\t' +
-					"ServerName "+ config.projects[i].urldev + '\r\n\t' +
+					"ServerName "+ config.projects[i].url + '\r\n\t' +
 				    '<Directory "' + config.projects[i].folder + '">' + '\r\n\t\t' +
 					"Order allow,deny" + '\r\n\t\t' +
 					"Allow from all" + '\r\n\t' +
@@ -50,7 +50,7 @@ function updateDriversHost(){
 			}
 			updateApacheVhost()
 			for (var i = 0; i < config.projects.length; i++) {		
-				fs.appendFile(config.settings.hosts_directory, "127.0.0.1       " + config.projects[i].urldev + "\n" , 'utf8', function (err, data) {
+				fs.appendFile(config.settings.hosts_directory, "127.0.0.1       " + config.projects[i].url + "\n" , 'utf8', function (err, data) {
 					if (err) throw err;
 				});		
 			}
@@ -59,4 +59,4 @@ function updateDriversHost(){
 	});
 }
 
-module.exports.new = updateDriversHost;
+module.exports.all = updateDriversHost;
