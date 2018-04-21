@@ -1,3 +1,6 @@
+[Presentacion de CLI Hosty]: https://firebasestorage.googleapis.com/v0/b/myweb-19046.appspot.com/o/Presentacion%20para%20GITHUB.png?alt=media&token=d04d0ecd-ecd8-4186-8de9-805946d57850
+ "Presentacion de CLI Hosty"
+
 # Hosty - Generator Virtual Server
 
 It is a Command Line Interface Application (CLI) that creates virtual servers for [xampp](https://www.apachefriends.org/en/index.html "xampp")
@@ -18,14 +21,14 @@ Please run Git BASH with Admin rights if you need Admin rights to access specifi
 ## Commands and rules
 Hosty manages a registry where all your projects and preferences will be stored locally, it is a file that is generated after starting the basic configuration called config.json
 
-#### Setting up Hosty for the first time
+### Setting up Hosty for the first time
 If you installed xampp with the default parameters, the hosty configuration will take those parameters and use them to configure the virtualhost, the program will understand the version of the operating system that you are using and where possibly all the dependencies that we need, for that you must enter the command:
 
 ```js
 $ hosty -config --default
 ```
 
-#### Create the first virtual server
+### Create the first virtual server
 By default the first virtual host will be **localhost**, now that we know that we will create our first project with the command:
 
 ```js
@@ -42,7 +45,7 @@ It is important to remember that we are working on the default folder of xampp i
 
 If you are working with an API for example Laravel you need to point the virtualhost to the public directory is as easy as adding / public to the directory where you point your project, for example `$hosty -c 'My Laravel API' api.laravel.dev laravelapi / public `
 
-#### Update the host
+### Update the host
 This command is only for when there is the possibility of wanting to edit the file config.json on your own, this file contains your preferences and projects listed for use in Hosty. You can use:
 
 ```js
@@ -51,7 +54,7 @@ $ hosty -u
 $ hosty -update
 ```
 
-#### List the projects
+### List the projects
 This command is fundamental to eliminate and edit projects, basically it makes a list of registered projects with an index which you must choose to do some other operation.
 
 ```js
@@ -66,23 +69,23 @@ $ 1 <- Project One
 $ 2 <- Project Two
 ```
 
-#### Edit a project
+### Edit a project
 
 In case you want to update the information of a project you must use the command and the index of the project, to know what the index uses `-l` or `-list`
 
 ```js
-$ hosty -c 'name' 'url' 'folder' 'index'
+$ hosty -e 'name' 'url' 'folder' 'index'
 ```
 
-#### Delete a project
+### Delete a project
 
 In case you want to delete the information of a project you must use the command and the index of the project, to know what the index uses `-l` or `-list`, the directory where the project is
 
 ```js
-$ hosty -c 'name' 'url' 'folder' 'index'
+$ hosty -d 'name' 'url' 'folder' 'index'
 ```
 
-#### Settings or preferences
+### Settings or preferences
 
 Before we had seen the command to configure the default environment but in case you want to change any of the usual preferences, here is the list of options
 
