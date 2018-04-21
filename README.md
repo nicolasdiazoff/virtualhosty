@@ -1,5 +1,4 @@
-[Presentacion de CLI Hosty]: https://firebasestorage.googleapis.com/v0/b/myweb-19046.appspot.com/o/Presentacion%20para%20GITHUB.png?alt=media&token=d04d0ecd-ecd8-4186-8de9-805946d57850
- "Presentacion de CLI Hosty"
+![Presentacion de CLI Hosty](https://firebasestorage.googleapis.com/v0/b/myweb-19046.appspot.com/o/Presentacion%20para%20GITHUB.png?alt=media&token=d04d0ecd-ecd8-4186-8de9-805946d57850)
 
 # Hosty - Generator Virtual Server
 
