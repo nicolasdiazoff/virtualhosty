@@ -10,7 +10,7 @@ What is Hosty? Hosty is a command line application built in node.js, you will ne
 We will need to install the package from the npm dependency distributor globally
 
 ```js
-	$ npm install hosty -g
+$ npm install hosty -g
 ```
 ## Usage
 Please run Git BASH with Admin rights if you need Admin rights to access specific folders.
@@ -22,14 +22,14 @@ Hosty manages a registry where all your projects and preferences will be stored 
 If you installed xampp with the default parameters, the hosty configuration will take those parameters and use them to configure the virtualhost, the program will understand the version of the operating system that you are using and where possibly all the dependencies that we need, for that you must enter the command:
 
 ```js
-	$ hosty -config --default
+$ hosty -config --default
 ```
 
 #### Create the first virtual server
 By default the first virtual host will be **localhost**, now that we know that we will create our first project with the command:
 
 ```js
-	$ hosty -c 'name' 'url' 'folder'
+$ hosty -c 'name' 'url' 'folder'
 ```
 
 The program handles * conditions * to avoid errors, that is why the fields of this command are obligatory, we explain to you. To create a virtual server at least we need a **name**, a **url** and a **folder** where your project will be.
@@ -46,24 +46,24 @@ If you are working with an API for example Laravel you need to point the virtual
 This command is only for when there is the possibility of wanting to edit the file config.json on your own, this file contains your preferences and projects listed for use in Hosty. You can use:
 
 ```js
-	$ hosty -u 
-	//or 
-	$ hosty -update
+$ hosty -u 
+//or 
+$ hosty -update
 ```
 
 #### List the projects
 This command is fundamental to eliminate and edit projects, basically it makes a list of registered projects with an index which you must choose to do some other operation.
 
 ```js
-	$ hosty -l 
-	//or 
-	$ hosty -list
+$ hosty -l 
+//or 
+$ hosty -list
 ```
 Departure:
 ```js
-	$ 0 <- Project Cero
-	$ 1 <- Project One
-	$ 2 <- Project Two
+$ 0 <- Project Cero
+$ 1 <- Project One
+$ 2 <- Project Two
 ```
 
 #### Edit a project
@@ -71,7 +71,7 @@ Departure:
 In case you want to update the information of a project you must use the command and the index of the project, to know what the index uses `-l` or `-list`
 
 ```js
-	$ hosty -c 'name' 'url' 'folder' 'index'
+$ hosty -c 'name' 'url' 'folder' 'index'
 ```
 
 #### Delete a project
@@ -79,7 +79,7 @@ In case you want to update the information of a project you must use the command
 In case you want to delete the information of a project you must use the command and the index of the project, to know what the index uses `-l` or `-list`, the directory where the project is
 
 ```js
-	$ hosty -c 'name' 'url' 'folder' 'index'
+$ hosty -c 'name' 'url' 'folder' 'index'
 ```
 
 #### Settings or preferences
@@ -88,10 +88,10 @@ Before we had seen the command to configure the default environment but in case 
 
 
 ```js
-	$ hosty -config xampp_apache_port 'Example:3000'
-	$ hosty -config conf_file 'path'
-	$ hosty -config hosts_ip_address 'Example:127.0.0.1'
-	$ hosty -config hosts_directory 'Example:C:/Windows/System64/drivers/etc/hosts'
-	$ hosty -config xampp_files_directory 'Example: C:/wonderland/'
-	$ hosty -config xampp_vhost_directory 'Example: C:/apache/conf/extra/httpd-vhosts.conf'
+$ hosty -config xampp_apache_port 'Example:3000'
+$ hosty -config conf_file 'path'
+$ hosty -config hosts_ip_address 'Example:127.0.0.1'
+$ hosty -config hosts_directory 'Example:C:/Windows/System64/drivers/etc/hosts'
+$ hosty -config xampp_files_directory 'Example: C:/wonderland/'
+$ hosty -config xampp_vhost_directory 'Example: C:/apache/conf/extra/httpd-vhosts.conf'
 ```
