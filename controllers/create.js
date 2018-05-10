@@ -1,6 +1,9 @@
 const fs = require('fs');
-const config = require('../config.json');
+const index = require('../index.js');
 const update = require('./update.js');
+
+// console.log(index.config);
+// const config = require(index.config.xampp_directory);
 
 var project = {
 	"title" : "",
@@ -27,10 +30,10 @@ function correctUrl(url) {
 			var url = url.replace("http://", "");
 		}
 	}
-	// add the suffix .dev so that the url is friendly in development
-	if(url.slice(-4) != ".dev") {
-		console.log("If you do not include .dev in the url it is automatically added");
-		element = url + ".dev";
+	// add the suffix .local so that the url is friendly in development
+	if(url.slice(-6) != ".local") {
+		console.log("If you do not include .local in the url it is automatically added");
+		element = url + ".local";
 	}else{
 		element = url;
 	}
@@ -39,24 +42,27 @@ function correctUrl(url) {
 
 //check if the url is in the registry
 function checkUrlPathExists() {
-	for (var i = 0; i < config.projects.length; i++){
-		if (config.projects[i].url == project.url) return i;
+	// console.log(JSON.parse(myAllProjects));
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));	
+	for (var i = 0; i < myAllProjects.projects.length; i++){
+		if (myAllProjects.projects[i].url == project.url) return i;
 	}
 }
 
 //check if the url of the folder is in the registry
 function checkFolderPathExists(path) {
-	for(var i = 0; i < config.projects.length; i++) {
-		if (config.projects[i].folder == config.settings.xampp_files_directory + path ) return i;
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+	for(var i = 0; i < myAllProjects.projects.length; i++){
+		if (myAllProjects.projects[i].folder == index.config.xampp_directory + path) return i;
 	}
 }
 
 // If the directory does not exist and is not registered, it is created
 function ifDoesNotExistCreateFolder(path){
 
-	fs.lstat(config.settings.xampp_files_directory + path, function(notexists, exists){
+	fs.lstat(index.config.xampp_directory + path, function(notexists, exists){
 		if(notexists){
-			fs.mkdir(config.settings.xampp_files_directory + path, function(err,data){
+			fs.mkdir(index.config.xampp_directory + path, function(err,data){
 				if (err) throw err;
 				console.log("The directory was created automatically")
 			});
@@ -93,7 +99,7 @@ function checkout() {
 function createProject() {
 
 	project.title = parameterName;
-	project.folder = config.settings.xampp_files_directory + parameterFolder;
+	project.folder = index.config.htdocs_directory + parameterFolder;
 	
 	correctUrl(parameterUrl);
 
@@ -107,7 +113,7 @@ function createProject() {
 		console.log("There is a project with the same path folder");					
 	}
 	else{
-		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
+		fs.readFile(index.config.htdocs_directory + index.config.conf_file, 'utf-8', function(err, data){
 			if (err == "EPERM"){
 				console.log("You need permision admins to")
 			} 
@@ -115,8 +121,8 @@ function createProject() {
 				ifDoesNotExistCreateFolder(parameterFolder);
 				var mocha = JSON.parse(data);
 				mocha.projects.push(project);
-				update.all(function(){
-					fs.writeFileSync(config.settings.conf_file, JSON.stringify(mocha), 'utf-8');
+				update.forCreate(function(){
+					fs.writeFileSync(index.config.htdocs_directory + index.config.conf_file, JSON.stringify(mocha), 'utf-8');
 					console.log("The project was registered correctly");
 				});
 			}

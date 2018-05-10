@@ -1,5 +1,4 @@
 const fs = require('fs');
-const config = require('../config.json');
 
 function projectDestroy(){
 	
@@ -12,7 +11,6 @@ function projectDestroy(){
 		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
 			if (err) throw err;
 			var mocha = JSON.parse(data);
-	
 	        mocha.projects.forEach(function(element,index,array) {
 	            console.log(index + " <- " + element.title);
 	        });	

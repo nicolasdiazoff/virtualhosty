@@ -7,7 +7,6 @@ npm-debug.log
 *.sh
 *.dev
 .DS_Store
-config.json
 
 # Docker
 Dockerfile

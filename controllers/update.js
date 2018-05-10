@@ -1,5 +1,5 @@
 const fs = require('fs');
-const config = require('../config.json');
+const index = require('../index.js');
 
 function randomString(){
 	var text = "";
@@ -11,22 +11,27 @@ function randomString(){
 	return text;
 }
 
-function updateApacheVhost(){
+function updateApacheVhost(updateHostDriver){
+
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
 
 	fs.readFile("./archive/httpd-vhosts", 'utf-8', function(err, data){
 		if (err) throw err;
-		fs.writeFile(config.settings.xampp_vhost_directory, data + "\n", 'utf-8', function(err, data){
+		fs.writeFile(index.config.xampp_directory + index.config.xampp_vhost_directory, data + "\n", 'utf-8', function(err, data){
 			if (err) {
 				console.log("Please run Git BASH with Admin rights.", err)
 			}
-			for (var i = 0; i < config.projects.length; i++) {		
-				fs.appendFile(config.settings.xampp_vhost_directory, 
+			for (var i = 0; i < myAllProjects.projects.length; i++) {		
+				fs.appendFile(index.config.xampp_directory + index.config.xampp_vhost_directory, 
 					"<VirtualHost *:80>" + '\r\n' + '\t' +
-					'DocumentRoot "' + config.projects[i].folder + '"' + '\r\n\t' +
-					"ServerName "+ config.projects[i].url + '\r\n\t' +
-				    '<Directory "' + config.projects[i].folder + '">' + '\r\n\t\t' +
-					"Order allow,deny" + '\r\n\t\t' +
-					"Allow from all" + '\r\n\t' +
+					'DocumentRoot "' + myAllProjects.projects[i].folder + '"' + '\r\n\t' +
+					"ServerName "+ myAllProjects.projects[i].url + '\r\n\t' +
+					"ServerAlias "+ myAllProjects.projects[i].url + '\r\n\t' +
+				    '<Directory "' + myAllProjects.projects[i].folder + '">' + '\r\n\t\t' +
+					"AllowOverride All" + '\r\n\t\t' +
+					"Require all Granted" + '\r\n\t' +
+					// "Order allow,deny" + '\r\n\t\t' +
+					// "Allow from all" + '\r\n\t' +
 					"</Directory>" + '\r\n' +
 					"</VirtualHost>" + '\r\n\n' , 
 					'utf8', 
@@ -40,11 +45,10 @@ function updateApacheVhost(){
 	});
 }
 
-function updateDriversHost(callback){
-
+function updateDriversHostforCreate(createproject){
 	fs.readFile("./archive/hosts", 'utf-8', function(err, data){
 		if (err) throw err;
-		fs.writeFile(config.settings.hosts_directory, data + "\n", 'utf-8', function(err, data){
+		fs.writeFile(index.config.host_directory, data + "\n", 'utf-8', function(err, data){
 			if (err) {
 				if (err.code == 'EPERM') {
 					console.log("ERROR!: Please run Git BASH with Admin rights.", "Error for driver host");
@@ -52,17 +56,25 @@ function updateDriversHost(callback){
 					return console.log(err);
 				}
 			} else{			
-				for (var i = 0; i < config.projects.length; i++) {		
-					fs.appendFile(config.settings.hosts_directory, "127.0.0.1       " + config.projects[i].url + "\n" , 'utf8', function (err, data) {
+				createproject();
+				var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+
+				for (var i = 0; i < myAllProjects.projects.length; i++) {		
+					fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {
 						if (err) throw err;
 					});		
 				}
 				console.log("Drivers Host were updated")
 				updateApacheVhost()
-				callback();
 			}
 		});
 	});
 }
 
-module.exports.all = updateDriversHost;
+function updateDriversHostforUpdate() {
+	// body...
+
+}
+
+module.exports.forCreate = updateDriversHostforCreate;
+module.exports.forUpdate = updateDriversHostforUpdate;

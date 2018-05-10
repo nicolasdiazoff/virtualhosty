@@ -45,8 +45,10 @@
     DocumentRoot "C:/xampp/htdocs/"
     ServerName localhost
     <Directory "C:/xampp/htdocs/">
-        Order allow,deny
-        Allow from all
+        AllowOverride All
+        Require all Granted
+        # Order allow,deny
+        # Allow from all
     </Directory>
 </VirtualHost>
 

@@ -1,1 +1,15 @@
-{"settings":{"xampp_vhost_directory":"C:/xampp/apache/conf/extra/httpd-vhosts.conf","xampp_files_directory":"C:/xampp/htdocs/","hosts_directory":"C:/Windows/System32/drivers/etc/hosts","hosts_ip_address":"127.0.0.1","conf_file":"./config.json","xampp_apache_port":80},"projects":[{"title":"Proyecto de Cursos","url":"cursoproject.dev","folder":"C:/xampp/htdocs/curso_project"},{"title":"Swipe Japanese","url":"swipejapanese.dev","folder":"C:/xampp/htdocs/swipejapanese"}]}
+{
+	"settings":{
+		"arch_windows": ["System32","System64"],
+		"arch_linux": ["System32","System64"],
+		"xampp_vhost_directory":"/apache/conf/extra/httpd-vhosts.conf",
+		"xampp_directory_default":"/xampp/",
+		"xampp_directory_custom": "",
+		"xampp_files_directory_default":"/xampp/htdocs/",
+		"xampp_files_directory_custom":"",
+		"xampp_files_settings":"C:/xampp/htdocs/hosty.json",
+		"hosts_ip_address":"127.0.0.1",
+		"conf_file":"projects.json",
+		"xampp_apache_port": 80
+	}
+}
