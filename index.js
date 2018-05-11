@@ -4,10 +4,10 @@ const config = require('./config.json');
 const os = require('os');
 const create = require('./controllers/create.js');
 const update = require('./controllers/update.js');
-// const edit = require('./controllers/edit.js');
+const edit = require('./controllers/edit.js');
 const read = require('./controllers/read.js');
-// const destroy = require('./controllers/destroy.js');
-// const setting = require('./controllers/setting.js');
+const destroy = require('./controllers/destroy.js');
+const help = require('./controllers/help.js');
 
 var ans = process.argv;
 
@@ -48,38 +48,44 @@ function optionsHosty(ansParams) {
 		case "-c":
 			create.new();
 			break;
-		case "create":
+		case "-create":
 			create.new();
 			break;
 		case "-u":
-			update.all();
+			update.forUpdate();
 			break;
 		case "-update":
-			update.all();
+			update.forUpdate();
 			break;
 		case "-r":
 			read.all();
 			break;
 		case "-list":
-			read.all();
+			read.allComplete();
 			break;
-		case "edit":
-			edit.project();
+		case "-edit":
+			edit.editProject();
 			break;
 		case "-e":
-			edit.project();
+			edit.editProject();
 			break;
 		case "-d":
-			destroy.vhost();
+			destroy.deleteProject();
 			break;
-		case "delete":
-			destroy.vhost();
+		case "-delete":
+			destroy.deleteProject();
 			break;
 		case "-config":
 			setting.setting();
 			break;
+		case "-h":
+			setting.setting();
+			break;
+		case "-help":
+			setting.setting();
+			break;
 		default:
-			console.log("No se reconoce ningun parametro");
+			console.log("No parameter is recognized");
 			break;
 	}
 }
@@ -104,7 +110,7 @@ function myOs(os) {
  	}
  	else if(os == 'Linux'){
  		drivers = searchHostForArch_Linux();
- 		console.log("buscamos los drivers en linux")
+ 		console.log("we look for the drivers in linux")
  	}	
  	return drivers;
 }

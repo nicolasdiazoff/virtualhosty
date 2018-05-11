@@ -1,42 +1,39 @@
 const fs = require('fs');
+const index = require('../index.js');
+const update = require('./update.js');
 
-function projectDestroy(){
-	
-    var ans = process.argv;
+var ans = process.argv;
 
-    var valor = ans[3];
+var parameterIndex = ans[3];
 
-    if (valor == null || valor.length == 0 || /^\s+$/.test(valor)){
-        console.log("Escoge el numero del proyecto que deseas eliminar");       
-		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
-			if (err) throw err;
-			var mocha = JSON.parse(data);
-	        mocha.projects.forEach(function(element,index,array) {
-	            console.log(index + " <- " + element.title);
-	        });	
+function Delete(){
 
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+
+	this.checkUrlPathSame = function(parameterIndex) {
+		myAllProjects.projects.forEach(function(currentValue, index, array) {
+			if(index == parameterIndex){
+				myAllProjects.projects.splice(parameterIndex, 1);
+			}
 		});
-    }
+		return myAllProjects.projects;
+	}
 
-    else if (ans.length <= 4 && valor == null || valor.length == 0 || /^\s+$/.test(valor)){
-    	if (isNaN(ans[4])) {}
-		fs.readFile(config.settings.conf_file, 'utf-8', function(err, data){
-			if (err) throw err;
-			var mocha = JSON.parse(data);
-
-            mocha.projects.splice(ans[4], 1);
-
-	        console.log("Eliminaste el proyecto ", mocha.projects[ans[3]].folder);
-			
-			fs.writeFileSync(config.settings.conf_file, JSON.stringify(mocha), 'utf-8');
-			// update.all();
-	        mocha.projects.forEach(function(element,index,array) {
-	            console.log(index + " " + element.title);
-	        });	
-
-		});
-    }
-	
 }
 
-module.exports.vhost = projectDestroy;
+
+function deleteProject() {
+
+	var deleted = new Delete(); 
+
+	if(parameterIndex <= deleted.checkUrlPathSame(parameterIndex).length){
+		update.forCreate(function(){
+			fs.writeFileSync(index.config.htdocs_directory + index.config.conf_file, 
+				JSON.stringify({"projects": deleted.checkUrlPathSame(parameterIndex)}),
+			'utf-8');
+			console.log("The project was eliminated");
+		});
+	}
+}
+
+module.exports.deleteProject = deleteProject;

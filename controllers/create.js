@@ -2,9 +2,6 @@ const fs = require('fs');
 const index = require('../index.js');
 const update = require('./update.js');
 
-// console.log(index.config);
-// const config = require(index.config.xampp_directory);
-
 var project = {
 	"title" : "",
 	"url" : "",
