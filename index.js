@@ -79,10 +79,10 @@ function optionsHosty(ansParams) {
 			setting.setting();
 			break;
 		case "-h":
-			setting.setting();
+			help.show();
 			break;
 		case "-help":
-			setting.setting();
+			help.show();
 			break;
 		default:
 			console.log("No parameter is recognized");
