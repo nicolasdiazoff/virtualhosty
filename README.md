@@ -73,7 +73,7 @@ $ 2 <- Project Two
 In case you want to update the information of a project you must use the command and the index of the project, to know what the index uses `-l` or `-list`
 
 ```js
-$ hosty -e 'name' 'url' 'folder' 'index'
+$ hosty -e 'name' 'url' 'folder' 'INDEX'
 ```
 
 ### Delete a project
@@ -81,7 +81,7 @@ $ hosty -e 'name' 'url' 'folder' 'index'
 In case you want to delete the information of a project you must use the command and the index of the project, to know what the index uses `-l` or `-list`, the directory where the project is
 
 ```js
-$ hosty -d 'name' 'url' 'folder' 'index'
+$ hosty -d 'INDEX'
 ```
 
 ### Settings or preferences

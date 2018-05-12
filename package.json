@@ -1,19 +1,13 @@
 {
   "name": "hosty",
-  "version": "1.1.0",
-  "description": "La funcion de hosty es crear servidores virtuales para xampp",
+  "version": "2.1.0",
+  "description": "The function of hosty is to create virtual servers for XAMPP in distributions of Windows, Linux and Apache",
   "main": "index.js",
   "bin": {
     "hosty": "index.js"
   },
   "directories": {
     "test": "test"
-  },
-  "dependencies": {
-    "prompt": "*"
-  },
-  "devDependencies": {
-    "prompt": "*"
   },
   "scripts": {
     "start": "node index.js",

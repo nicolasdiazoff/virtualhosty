@@ -3,6 +3,7 @@ const fs = require('fs');
 const config = require('./config.json');
 const os = require('os');
 const create = require('./controllers/create.js');
+const setting = require('./controllers/setting.js');
 const update = require('./controllers/update.js');
 const edit = require('./controllers/edit.js');
 const read = require('./controllers/read.js');
