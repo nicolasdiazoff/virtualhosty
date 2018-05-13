@@ -57,16 +57,16 @@ function updateDriversHostforCreate(createproject){
 					return console.log(err);
 				}
 			} else{			
-				// createproject();
-				// var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+				createproject();
+				var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
 
-				// for (var i = 0; i < myAllProjects.projects.length; i++) {		
-				// 	fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {
-				// 		if (err) throw err;
-				// 	});		
-				// }
-				// console.log("Drivers Host were updated")
-				// updateApacheVhost()
+				for (var i = 0; i < myAllProjects.projects.length; i++) {		
+					fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {
+						if (err) throw err;
+					});		
+				}
+				console.log("Drivers Host were updated")
+				updateApacheVhost()
 			}
 		});
 	});
