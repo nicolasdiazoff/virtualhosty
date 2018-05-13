@@ -1,6 +1,6 @@
 {
   "name": "virtualhosty",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "The function of hosty is to create virtual servers for XAMPP in distributions of Windows, Linux and Apache",
   "main": "index.js",
   "keywords": [
