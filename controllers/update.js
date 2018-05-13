@@ -18,7 +18,7 @@ function updateApacheVhost(updateHostDriver){
 
 	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
 
-	fs.readFile("./archive/httpd-vhosts", 'utf-8', function(err, data){
+	fs.readFile(path.join(__dirname, '..', 'archive', 'httpd-vhosts'), 'utf-8', function(err, data){
 		if (err) throw err;
 		fs.writeFile(index.config.xampp_directory + index.config.xampp_vhost_directory, data + "\n", 'utf-8', function(err, data){
 			if (err) {
@@ -50,37 +50,34 @@ function updateApacheVhost(updateHostDriver){
 
 function updateDriversHostforCreate(createproject){
 
-	console.log("../archive/" + path.basename(__filename));
-	console.log("../archive/" + path.basename(__dirname));
+	fs.readFile(path.join(__dirname, '..', 'archive', 'hosts'), 'utf-8', function(err, data){
+		if (err) throw err;
+		fs.writeFile(index.config.host_directory, data + "\n", 'utf-8', function(err, data){
+			console.log(index.config.host_directory);
+			if (err) {
+				if (err.code == 'EPERM') {
+					console.log("ERROR!: Please run Git BASH with Admin rights.", "Error for driver host");
+				} else {
+					return console.log(err);
+				}
+			} else{			
+				createproject();
+				var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
 
-	// fs.readFile("archive/hosts", 'utf-8', function(err, data){
-	// 	if (err) throw err;
-	// 	fs.writeFile(index.config.host_directory, data + "\n", 'utf-8', function(err, data){
-	// 		console.log(index.config.host_directory);
-	// 		if (err) {
-	// 			if (err.code == 'EPERM') {
-	// 				console.log("ERROR!: Please run Git BASH with Admin rights.", "Error for driver host");
-	// 			} else {
-	// 				return console.log(err);
-	// 			}
-	// 		} else{			
-	// 			// createproject();
-	// 			// var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
-
-	// 			// for (var i = 0; i < myAllProjects.projects.length; i++) {		
-	// 			// 	fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {
-	// 			// 		if (err) throw err;
-	// 			// 	});		
-	// 			// }
-	// 			// console.log("Drivers Host were updated")
-	// 			// updateApacheVhost()
-	// 		}
-	// 	});
-	// });
+				for (var i = 0; i < myAllProjects.projects.length; i++) {		
+					fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {
+						if (err) throw err;
+					});		
+				}
+				console.log("Drivers Host were updated")
+				updateApacheVhost()
+			}
+		});
+	});
 }
 
 function updateDriversHostforUpdate() {
-	fs.readFile("./archive/hosts", 'utf-8', function(err, data){
+	fs.readFile(path.join(__dirname, '..', 'archive', 'hosts'), 'utf-8', function(err, data){
 		if (err) throw err;
 		fs.writeFile(index.config.host_directory, data + "\n", 'utf-8', function(err, data){
 			if (err) {
