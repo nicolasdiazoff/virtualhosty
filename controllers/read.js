@@ -10,8 +10,6 @@ function projectRead(){
 	        var mocha = JSON.parse(data);
 	        mocha.projects.forEach(function(element,index,array){
 	            console.log(index + " <= " + element.title);
-	            // console.log('\t' + "URL:" + element.url);
-	            // console.log('\t' + "FOLDER:" + element.folder);
 	        });        	
         }
     });

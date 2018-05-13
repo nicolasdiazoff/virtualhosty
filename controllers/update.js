@@ -2,8 +2,6 @@ const fs = require('fs');
 const index = require('../index.js');
 var path = require('path');
 
-// require('/path/to/file2.js')
-
 function randomString(){
 	var text = "";
 	var posissible = "ABCDFGHIJKLMNOPQRSTUVWXYZabcdfghijklmnopqrstuvwxyz";
@@ -53,7 +51,6 @@ function updateDriversHostforCreate(createproject){
 	fs.readFile(path.join(__dirname, '..', 'archive', 'hosts'), 'utf-8', function(err, data){
 		if (err) throw err;
 		fs.writeFile(index.config.host_directory, data + "\n", 'utf-8', function(err, data){
-			console.log(index.config.host_directory);
 			if (err) {
 				if (err.code == 'EPERM') {
 					console.log("ERROR!: Please run Git BASH with Admin rights.", "Error for driver host");
