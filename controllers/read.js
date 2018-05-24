@@ -2,7 +2,7 @@ const fs = require('fs');
 const index = require('../index.js');
 
 function projectRead(){
-    fs.readFile(index.config.htdocs_directory + index.config.conf_file, 'utf-8', function(err, data){
+    fs.readFile(index.config.conf_file, 'utf-8', function(err, data){
         if (err == 'ENOENT'){
         	console.log("The project file does not exist ... we will create it");
         	index.createProjectFile();
@@ -16,7 +16,7 @@ function projectRead(){
 }
 
 function readAllProjectsComplete(){
-    fs.readFile(index.config.htdocs_directory + index.config.conf_file, 'utf-8', function(err, data){
+    fs.readFile(index.config.conf_file, 'utf-8', function(err, data){
         if (err == 'ENOENT'){
             console.log("The project file does not exist ... we will create it");
             index.createProjectFile();

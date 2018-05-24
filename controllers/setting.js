@@ -15,7 +15,7 @@ var parameterIndex = ans[3];
 
 function config() {
 
-    fs.readFile(index.config.htdocs_directory + index.config.conf_file, 'utf-8', function(err, data){
+    fs.readFile(index.config.conf_file, 'utf-8', function(err, data){
         if (err == 'ENOENT'){
         	console.log("The project file does not exist ... we will create it");
         	index.createProjectFile();

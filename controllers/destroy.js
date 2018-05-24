@@ -8,7 +8,7 @@ var parameterIndex = ans[3];
 
 function Delete(){
 
-	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.conf_file));
 
 	this.checkUrlPathSame = function(parameterIndex) {
 		myAllProjects.projects.forEach(function(currentValue, index, array) {
@@ -28,7 +28,7 @@ function deleteProject() {
 
 	if(parameterIndex <= deleted.checkUrlPathSame(parameterIndex).length){
 		update.forCreate(function(){
-			fs.writeFileSync(index.config.htdocs_directory + index.config.conf_file, 
+			fs.writeFileSync(index.config.conf_file, 
 				JSON.stringify({"projects": deleted.checkUrlPathSame(parameterIndex)}),
 			'utf-8');
 			console.log("The project was eliminated");
