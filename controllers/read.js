@@ -15,6 +15,7 @@ function projectRead(){
     });
 }
 
+
 function readAllProjectsComplete(){
     fs.readFile(index.config.conf_file, 'utf-8', function(err, data){
         if (err == 'ENOENT'){
