@@ -9,6 +9,7 @@ const edit = require('./controllers/edit.js');
 const read = require('./controllers/read.js');
 const destroy = require('./controllers/destroy.js');
 const help = require('./controllers/help.js');
+const path = require('path');
 
 var ans = process.argv;
 
@@ -17,7 +18,7 @@ const objetoDefino = {
 	"xampp_directory": undefined,
 	"htdocs_directory": undefined,
 	"xampp_vhost_directory": config.settings.xampp_vhost_directory, 
-	"conf_file": config.settings.conf_file
+	"conf_file": path.join(__dirname, 'projects.json')
 };
 
 module.exports.config = objetoDefino;
@@ -36,11 +37,11 @@ function createProjectFile() {
 	}
 
 	if(config.settings.xampp_directory_custom == ""){
-		fs.writeFileSync("/xampp/htdocs/" + config.settings.conf_file , JSON.stringify(formatForFileProjects), 'utf-8');
+		fs.writeFileSync(config.settings.conf_file , JSON.stringify(formatForFileProjects), 'utf-8');
 	}
 	else{
-		formatForFileProjects.projects[0].folder = config.settings.xampp_files_directory_default + config.settings.conf_file;
-		fs.writeFileSync(config.settings.xampp_files_directory_default + config.settings.conf_file , JSON.stringify(formatForFileProjects), 'utf-8');
+		formatForFileProjects.projects[0].folder = config.settings.conf_file;
+		fs.writeFileSync(config.settings.conf_file , JSON.stringify(formatForFileProjects), 'utf-8');
 	}
 }
 
@@ -93,15 +94,16 @@ function optionsHosty(ansParams) {
 
 function searchHostForArch_Windows() {
 	var arch;
- 	if (os.arch == 'ia32') {
- 		arch = 'System32'
- 	}else if(os.arch == 'ia64'){
- 		arch = 'System64'
+ 	if (os.arch() == "ia32" || os.arch() == "x32") {
+ 		arch = "System32"
+ 	}else if(os.arch() == "ia64" || os.arch() == "x64"){
+ 		arch = "System32"
  	}
  	return "/Windows/" + arch + "/drivers/etc/hosts";
 }
 
 function searchHostForArch_Linux() {
+
 }
 
 function myOs(os) {
@@ -164,4 +166,5 @@ function docsDefault(){
 		objetoDefino.host_directory = myOs(os.type());
 	}
 })();
+
 

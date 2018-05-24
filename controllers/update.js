@@ -14,7 +14,7 @@ function randomString(){
 
 function updateApacheVhost(updateHostDriver){
 
-	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.conf_file));
 
 	fs.readFile(path.join(__dirname, '..', 'archive', 'httpd-vhosts'), 'utf-8', function(err, data){
 		if (err) throw err;
@@ -59,7 +59,7 @@ function updateDriversHostforCreate(createproject){
 				}
 			} else{			
 				createproject();
-				var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+				var myAllProjects = JSON.parse(fs.readFileSync(index.config.conf_file));
 
 				for (var i = 0; i < myAllProjects.projects.length; i++) {		
 					fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {
@@ -84,7 +84,7 @@ function updateDriversHostforUpdate() {
 					return console.log(err);
 				}
 			} else{			
-				var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+				var myAllProjects = JSON.parse(fs.readFileSync(index.config.conf_file));
 
 				for (var i = 0; i < myAllProjects.projects.length; i++) {		
 					fs.appendFile(index.config.host_directory, "127.0.0.1       " + myAllProjects.projects[i].url + "\n" , 'utf8', function (err, data) {

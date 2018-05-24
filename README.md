@@ -12,7 +12,7 @@ What is Hosty? Hosty is a command line application built in node.js, you will ne
 We will need to install the package from the npm dependency distributor globally
 
 ```js
-$ npm install hosty -g
+$ npm install -g virtualhosty
 ```
 ## Usage
 Please run Git BASH with Admin rights if you need Admin rights to access specific folders.

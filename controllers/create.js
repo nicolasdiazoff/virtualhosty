@@ -40,7 +40,7 @@ function correctUrl(url) {
 //check if the url is in the registry
 function checkUrlPathExists() {
 	// console.log(JSON.parse(myAllProjects));
-	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));	
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.conf_file));	
 	for (var i = 0; i < myAllProjects.projects.length; i++){
 		if (myAllProjects.projects[i].url == project.url) return i;
 	}
@@ -48,7 +48,7 @@ function checkUrlPathExists() {
 
 //check if the url of the folder is in the registry
 function checkFolderPathExists(path) {
-	var myAllProjects = JSON.parse(fs.readFileSync(index.config.htdocs_directory + index.config.conf_file));
+	var myAllProjects = JSON.parse(fs.readFileSync(index.config.conf_file));
 	for(var i = 0; i < myAllProjects.projects.length; i++){
 		if (myAllProjects.projects[i].folder == index.config.xampp_directory + path) return i;
 	}
@@ -95,6 +95,7 @@ function checkout() {
 
 function createProject() {
 
+
 	project.title = parameterName;
 	project.folder = index.config.htdocs_directory + parameterFolder;
 	
@@ -110,7 +111,7 @@ function createProject() {
 		console.log("There is a project with the same path folder");					
 	}
 	else{
-		fs.readFile(index.config.htdocs_directory + index.config.conf_file, 'utf-8', function(err, data){
+		fs.readFile(index.config.conf_file, 'utf-8', function(err, data){
 			if (err == "EPERM"){
 				console.log("You need permision admins to")
 			} 
@@ -119,7 +120,7 @@ function createProject() {
 				var mocha = JSON.parse(data);
 				mocha.projects.push(project);
 				update.forCreate(function(){
-					fs.writeFileSync(index.config.htdocs_directory + index.config.conf_file, JSON.stringify(mocha), 'utf-8');
+					fs.writeFileSync(index.config.conf_file, JSON.stringify(mocha), 'utf-8');
 					console.log("The project was registered correctly");
 				});
 			}
