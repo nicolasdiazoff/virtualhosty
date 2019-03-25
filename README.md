@@ -1,6 +1,14 @@
-![Presentacion de CLI Hosty](https://firebasestorage.googleapis.com/v0/b/myweb-19046.appspot.com/o/Presentacion%20para%20GITHUB.png?alt=media&token=d04d0ecd-ecd8-4186-8de9-805946d57850)
+![Presentation of CLI Hosty on Github](https://nicolasdiazoff.com/wp-content/uploads/2019/03/safe_image.php_.png)
 
 # Hosty - Generator Virtual Server
+
+[![npm](https://img.shields.io/npm/v/claudia-bot-builder.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/virtualhosty)
+
+[![npm](https://img.shields.io/npm/dt/claudia-bot-builder.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/virtualhosty)
+
+[![npm](https://img.shields.io/npm/l/claudia-bot-builder.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/virtualhosty)
+
+[![Build Status](https://travis-ci.org/claudiajs/claudia-bot-builder.svg?branch=master)](https://www.npmjs.com/package/virtualhosty)
 
 It is a Command Line Interface Application (CLI) that creates virtual servers for [xampp](https://www.apachefriends.org/en/index.html "xampp")
 
